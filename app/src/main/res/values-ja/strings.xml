@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
+    <string name="action_fullscreen">全画面表示</string>
+    <string name="action_settings">設定</string>
+    <string name="default_language">ja</string>
+    <string name="action_help">ヘルプ</string>
+    <string name="pref_categ_piano">ピアノ</string>
+    <string name="pick_lang">言語を選択</string>
+    <string name="theme">テーマ</string>
+    <string name="midi_output_mode">MIDI出力モード</string>
+    <string name="language">表示言語</string>
+    <string name="pref_categ_prog">アプリケーション</string>
+    <string name="pref_categ_synth">MIDIシンセ</string>
+    <string name="wifi_dialog_message">WiFiを有効化にしてください。</string>
+    <string name="wifi_dialog_title">通信エラー</string>
+    <string name="prefs_reset_title">デフォルトの設定を読み込む</string>
+    <string name="prefs_reset_summary">すべての設定アイテムを既定値に戻ります。</string>
+    <string name="ip_address">マルチキャスト アドレス</string>
+    <string name="resetdlg_title">確認</string>
+    <string name="resetdlg_message">今まで変更されていた設定は失われます。それでも本当に続行よろしいですか？</string>
+</resources>

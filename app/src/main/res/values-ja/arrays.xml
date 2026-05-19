@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
+    <string-array name="lang_entries" >
+        <item>英語</item>
+        <item>スペイン語</item>
+        <item>日本語</item>
+    </string-array>
+</resources>

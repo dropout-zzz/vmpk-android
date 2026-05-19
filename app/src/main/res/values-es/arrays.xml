@@ -4,11 +4,7 @@
    <string-array name="lang_entries" >
        <item>Inglés</item>
        <item>Español</item>
-   </string-array>
-    
-   <string-array name="lang_values" >
-       <item>en</item>
-       <item>es</item>
+       <item>Japonés</item>
    </string-array>
    
    <string-array name="note_names">
