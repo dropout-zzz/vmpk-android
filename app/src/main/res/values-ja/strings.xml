@@ -32,4 +32,10 @@
     <string name="pref_categ_network">ネットワーク(ipMIDI)</string>
     <string name="first_key">一番最初の鍵</string>
     <string name="key_color">押された時の色</string>
+    <string name="reset">リセット</string>
+    <string name="action_common">基本</string>
+    <string name="action_velocity">ベロシティ</string>
+    <string name="turn">回転で調整</string>
+    <string name="action_instrument">音色</string>
+    <string name="action_controller">コントロール</string>
 </resources>

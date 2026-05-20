@@ -21,4 +21,32 @@
         <item>ウェーブテーブル</item>
         <item>FM</item>
     </string-array>
+    <string-array name="channels">
+        <item>チャンネル1</item>
+        <item>チャンネル2</item>
+        <item>チャンネル3</item>
+        <item>チャンネル4</item>
+        <item>チャンネル5</item>
+        <item>チャンネル6</item>
+        <item>チャンネル7</item>
+        <item>チャンネル8</item>
+        <item>チャンネル9</item>
+        <item>チャンネル10</item>
+        <item>チャンネル11</item>
+        <item>チャンネル12</item>
+        <item>チャンネル13</item>
+        <item>チャンネル14</item>
+        <item>チャンネル15</item>
+        <item>チャンネル16</item>
+    </string-array>
+    <string-array name="octaves">
+        <item>オクターブ0</item>
+        <item>オクターブ1</item>
+        <item>オクターブ2</item>
+        <item>オクターブ3</item>
+        <item>オクターブ4</item>
+        <item>オクターブ5</item>
+        <item>オクターブ6</item>
+        <item>オクターブ7</item>
+    </string-array>
 </resources>
