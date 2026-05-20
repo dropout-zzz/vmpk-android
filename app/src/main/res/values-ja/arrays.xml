@@ -49,4 +49,22 @@
         <item>オクターブ6</item>
         <item>オクターブ7</item>
     </string-array>
+    <string-array name="gm_groups">
+        <item>ピアノ</item>
+        <item>音階付き打楽器</item>
+        <item>オルガン</item>
+        <item>ギター</item>
+        <item>ベース</item>
+        <item>ストリングス</item>
+        <item>アンサンブル</item>
+        <item>ブラス</item>
+        <item>リード</item>
+        <item>パイプ(笛／木管)</item>
+        <item>シンセ・リード</item>
+        <item>シンセ・パッド</item>
+        <item>シンセ・エフェクト</item>
+        <item>エスニック／民族楽器</item>
+        <item>打楽器</item>
+        <item>効果音</item>
+    </string-array>
 </resources>
