@@ -17,5 +17,5 @@
     <string name="prefs_reset_summary">すべての設定アイテムを既定値に戻ります。</string>
     <string name="ip_address">マルチキャスト アドレス</string>
     <string name="resetdlg_title">確認</string>
-    <string name="resetdlg_message">今まで変更されていた設定は失われます。それでも本当に続行よろしいですか？</string>
+    <string name="resetdlg_message">今まで変更されていた設定が失われます。それでも本当に続行よろしいですか？</string>
 </resources>
