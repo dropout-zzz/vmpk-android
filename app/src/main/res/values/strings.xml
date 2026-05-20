@@ -38,8 +38,6 @@
     <string name="theme_dark">Dark</string>
     <string name="synth">Synth</string>
     <string name="network">ipMIDI</string>
-    <string name="summary_synth">Internal MIDI Synthesizer</string>
-    <string name="summary_network">Network - UDP Multicast (ipMIDI)</string>
     <string name="number_keys">Please select the number of keys:</string>
     <string name="number_keys_t">Number of Piano Keys</string>
     <string name="key_color">Key Pressed Color</string>

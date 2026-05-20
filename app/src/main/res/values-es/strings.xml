@@ -32,8 +32,6 @@
     <string name="theme_dark">Oscuro</string>
     <string name="synth">Sinte</string>
     <string name="network">Red</string>
-    <string name="summary_synth">Syntetizador MIDI interno</string>
-    <string name="summary_network">Red - UDP Multicast (ipMIDI)</string>
     <string name="number_keys">Por favor, selecciona el número de teclas:</string>
     <string name="number_keys_t">Número de teclas de piano</string>
     <string name="key_color">Color de las teclas pulsadas</string>
