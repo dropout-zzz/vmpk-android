@@ -75,4 +75,5 @@
     <string name="dialog_midi_device_error_message">The MIDI device has disconnected.</string>
     <string name="dialog_midi_port_error_title">MIDI Port Error</string>
     <string name="dialog_midi_port_error_message">Failed to open the MIDI input port.</string>
+    <string name="sound_engine">Sound Engine</string>
 </resources>

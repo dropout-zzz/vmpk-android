@@ -5,4 +5,9 @@
         <item>スペイン語</item>
         <item>日本語</item>
     </string-array>
+    <string-array name="midi_output_mode_names">
+        <item>Android MIDI</item>
+        <item>ﾈｯﾄﾜｰｸによるUDPﾏﾙﾁｷｬｽﾄ(ipMIDI)</item>
+        <item>内蔵MIDIシンセ</item>
+    </string-array>
 </resources>
