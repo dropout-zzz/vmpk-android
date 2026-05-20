@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="ja">
+    <string name="action_about">アプリ情報</string>
     <string name="action_fullscreen">全画面表示</string>
     <string name="action_settings">設定</string>
     <string name="default_language">ja</string>
+    <string name="action_shownames">音名を表示</string>
     <string name="action_help">ヘルプ</string>
     <string name="pref_categ_piano">ピアノ</string>
     <string name="pick_lang">言語を選択</string>
@@ -20,6 +22,8 @@
     <string name="resetdlg_message">今まで変更されていた設定が失われます。それでも本当に続行よろしいですか？</string>
     <string name="number_keys">数字を選択してください</string>
     <string name="number_keys_t">鍵盤の数</string>
+    <string name="reverb">リバーブ</string>
+    <string name="chorus">コーラス</string>
     <string name="port_number">ポート番号</string>
     <string name="ip_proto">接続方式</string>
     <string name="sound_engine">エンジン</string>

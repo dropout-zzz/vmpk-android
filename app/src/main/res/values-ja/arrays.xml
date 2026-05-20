@@ -10,4 +10,15 @@
         <item>ﾈｯﾄﾜｰｸによるUDPﾏﾙﾁｷｬｽﾄ(ipMIDI)</item>
         <item>内蔵MIDIシンセ</item>
     </string-array>
+    <string-array name="chorus_names">
+        <item>プリセット1</item>
+        <item>プリセット2</item>
+        <item>プリセット3</item>
+        <item>プリセット4</item>
+        <item>オフ</item>
+    </string-array>
+    <string-array name="sound_engine_names">
+        <item>ウェーブテーブル</item>
+        <item>FM</item>
+    </string-array>
 </resources>
