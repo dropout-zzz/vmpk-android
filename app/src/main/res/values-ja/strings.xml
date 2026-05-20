@@ -26,7 +26,7 @@
     <string name="chorus">コーラス</string>
     <string name="port_number">ポート番号</string>
     <string name="ip_proto">接続方式</string>
-    <string name="sound_engine">エンジン</string>
+    <string name="sound_engine">音源方式</string>
     <string name="double_keyboard">全画面でもう一つのピアノを表示</string>
     <string name="pref_categ_network">ネットワーク(ipMIDI)</string>
 </resources>
