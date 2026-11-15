@@ -1,4 +1,4 @@
 [submodule "app/src/main/jni/sonivox"]
 	path = app/src/main/jni/sonivox
-	url = git@github.com:EmbeddedSynth/sonivox.git
+	url = https://github.com/EmbeddedSynth/sonivox.git
 	branch = master
