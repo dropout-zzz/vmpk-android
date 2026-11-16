@@ -27,7 +27,7 @@
         android:key="color"
         android:title="@string/key_color" 
         android:summary="@string/pick_color"
-        android:defaultValue="@android:color/holo_blue_dark"
+        android:defaultValue="?android:attr/colorAccent"
         />
 
       <ListPreference

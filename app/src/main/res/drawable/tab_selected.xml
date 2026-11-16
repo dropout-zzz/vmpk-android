@@ -13,6 +13,14 @@
         android:bottom="@dimen/tab_space"
         android:left="@dimen/tab_space"
         android:right="@dimen/tab_space"
-        android:top="@dimen/tab_space"
-        android:drawable="@drawable/gradientbg" />
+        android:top="@dimen/tab_space">
+        <shape android:shape="rectangle">
+            <corners
+                android:bottomLeftRadius="@dimen/corner_radius"
+                android:bottomRightRadius="@dimen/corner_radius"
+                android:topLeftRadius="@dimen/corner_radius"
+                android:topRightRadius="@dimen/corner_radius"/>
+            <solid android:color="?android:attr/colorAccent"/>
+        </shape>
+    </item>
 </layer-list>

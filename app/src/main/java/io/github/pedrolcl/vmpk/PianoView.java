@@ -4,8 +4,6 @@
 package io.github.pedrolcl.vmpk;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -26,7 +24,6 @@ public class PianoView extends View {
 	private Paint mBlackPen = null;
 	private Paint mWhitePen = null;
 	private Paint mHiliteBrush = null;
-	private Bitmap mBlackKeyBmp = null;
 	private Rect mRect = null;
 	private ArrayList<PianoKey> mKeys, mReversed;
 	private SparseArray<PianoKey> mLast;
@@ -66,13 +63,10 @@ public class PianoView extends View {
 			String txt = (mChannel == 9 ? mTextPerc : mText);
 			canvas.drawRoundRect(mBounds, 4f, 4f, mIsPressed ? mHiliteBrush : mBrush);
 			canvas.drawRoundRect(mBounds, 4f, 4f, mBlackPen);
-			if (mIsBlack) {
-				canvas.drawBitmap(mBlackKeyBmp, null, mBounds, null);
-			}
 			if (mShowingNames && txt != null) {
 				canvas.save();
 				canvas.rotate(-90f, mXText, mYText);
-				canvas.drawText(txt, mXText, mYText, mIsBlack ? mWhitePen : mBlackPen);
+				canvas.drawText(txt, mXText, mYText, mIsBlack ? mWhiteBrush : mBlackBrush);
 				canvas.restore();
 			}
 		}
@@ -101,7 +95,6 @@ public class PianoView extends View {
 		mFirstKey = context.getResources().getInteger(R.integer.first_key);
 		mKeys = new ArrayList<PianoKey>();
 		mLast = new SparseArray<PianoKey>();
-		mBlackKeyBmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.blkey);
 
 		if (isInEditMode()) {
 			mNoteNames = new String[12];
@@ -128,10 +121,12 @@ public class PianoView extends View {
 
 		mWhiteBrush = new Paint(Paint.ANTI_ALIAS_FLAG);
 		mWhiteBrush.setStyle(Paint.Style.FILL);
+		mWhiteBrush.setTextSize(20.0f);
 		mWhiteBrush.setColor(Color.WHITE);
 
 		mBlackBrush = new Paint(Paint.ANTI_ALIAS_FLAG);
 		mBlackBrush.setStyle(Paint.Style.FILL);
+		mBlackBrush.setTextSize(20.0f);
 		mBlackBrush.setColor(Color.BLACK);
 
 		mHiliteBrush = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -141,12 +136,10 @@ public class PianoView extends View {
 
 		mWhitePen = new Paint(Paint.ANTI_ALIAS_FLAG);
 		mWhitePen.setStyle(Paint.Style.STROKE);
-		mWhitePen.setTextSize(20.0f);
 		mWhitePen.setColor(Color.WHITE);
 
 		mBlackPen = new Paint(Paint.ANTI_ALIAS_FLAG);
 		mBlackPen.setStyle(Paint.Style.STROKE);
-		mBlackPen.setTextSize(20.0f);
 		mBlackPen.setColor(Color.BLACK);
 	}
 
@@ -182,8 +175,8 @@ public class PianoView extends View {
 		// Log.d(VIEW_LOG_TAG, String.format("keyWidth=%f, keyHeight=%f", mKeyWidth,
 		// mKeyHeight));
 		mTextSize = mKeyWidth * .4f; // Text size
-		mBlackPen.setTextSize(mTextSize);
-		mWhitePen.setTextSize(mTextSize);
+		mBlackBrush.setTextSize(mTextSize);
+		mWhiteBrush.setTextSize(mTextSize);
 		mKeys.clear();
 		int adj = mFirstKey % 12;
 		if (adj >= 5)
