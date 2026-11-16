@@ -13,12 +13,15 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import java.net.DatagramPacket;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 // independent thread, to manage background send
 // AsyncTask: http://developer.android.com/reference/android/os/AsyncTask.html
@@ -29,12 +32,14 @@ public class NetworkMidi implements MidiEngine {
 	private WifiManager.MulticastLock mLock = null;
 
 	// settings for the port number and the multicast group
+	static final String DEFAULT_IFACE_NAME = "";
 	static final String DEFAULT_IP_PROTOCOL = "4";
 	static final int DEFAULT_PORT_NO = 21928;
 	static final String DEFAULT_GROUP_ADDR_V4 = "225.0.0.37";
 	static final String DEFAULT_GROUP_ADDR_V6 = "ff12::37";
 	// static final int TIME_TO_LIVE = 1;
 
+	private String mIfaceName;
 	private String mProtocol;
 	private int mPort;
 	private InetAddress mGroupAddr;
@@ -75,11 +80,14 @@ public class NetworkMidi implements MidiEngine {
 	public NetworkMidi(Activity activity) {
 		try {
 			mWifi = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
-			NetworkInfo info = getConnectedWifiNetworkInfo(activity);
-			if (info == null || !info.isConnectedOrConnecting()) {
-				alertDialog(activity);
-			}
 			readSettings(activity);
+
+			if (mIfaceName.equals(DEFAULT_IFACE_NAME)) {
+				NetworkInfo info = getConnectedWifiNetworkInfo(activity);
+				if (info == null || !info.isConnectedOrConnecting()) {
+					alertDialog(activity);
+				}
+			}
 		} catch (Exception ex) {
 			alertDialog(activity);
 			Log.e("NetworkMidi", "Constructor error", ex);
@@ -98,6 +106,7 @@ public class NetworkMidi implements MidiEngine {
 	private void readSettings(Activity activity) {
 		try {
 			SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(activity);
+			mIfaceName = sharedPrefs.getString("if_name", DEFAULT_IFACE_NAME);
 			mProtocol = sharedPrefs.getString( "default_protocol", DEFAULT_IP_PROTOCOL);
 			mPort = sharedPrefs.getInt("port_number", DEFAULT_PORT_NO);
 			if (mProtocol == DEFAULT_IP_PROTOCOL) {
@@ -116,17 +125,47 @@ public class NetworkMidi implements MidiEngine {
 		readSettings(activity);
 		try {
 			mSocket = new MulticastSocket(mPort);
-			WifiInfo winfo = mWifi.getConnectionInfo();
-			int intaddr = winfo.getIpAddress();
-			byte[] byteaddr = new byte[] {
-					(byte) (intaddr & 0xff),
-					(byte) (intaddr >> 8 & 0xff),
-					(byte) (intaddr >> 16 & 0xff),
-					(byte) (intaddr >> 24 & 0xff)
-			};
-			NetworkInterface nic = NetworkInterface.getByInetAddress(InetAddress.getByAddress(byteaddr));
+			NetworkInterface nic = null;
+			if (mIfaceName.equals(DEFAULT_IFACE_NAME)) {
+				WifiInfo winfo = mWifi.getConnectionInfo();
+				int intaddr = winfo.getIpAddress();
+				byte[] byteaddr = new byte[] {
+						(byte) (intaddr & 0xff),
+						(byte) (intaddr >> 8 & 0xff),
+						(byte) (intaddr >> 16 & 0xff),
+						(byte) (intaddr >> 24 & 0xff)
+				};
+				nic = NetworkInterface.getByInetAddress(InetAddress.getByAddress(byteaddr));
+			} else {
+				Enumeration<NetworkInterface> nics = NetworkInterface.getNetworkInterfaces();
+
+				while (nics.hasMoreElements()) {
+					NetworkInterface iface = nics.nextElement();
+
+					if (mIfaceName.equals(iface.getName())) {
+						nic = iface;
+						break;
+					}
+				}
+
+				if (nic == null) {
+					mSocket = null;
+					Toast.makeText(activity, R.string.no_interface, Toast.LENGTH_LONG).show();
+					return;
+				}
+			}
 			mSocket.setNetworkInterface(nic);
-			mSocket.joinGroup(mGroupAddr);
+			try {
+				mSocket.joinGroup(mGroupAddr);
+			} catch (SocketException ex) {
+				/* For some reason this may say "setsockopt failed: ENODEV".
+				 *
+				 * This happens when Mobile Data and WiFi are both off,
+				 * but sending MIDI events still appear to work.
+				 *
+				 * Relevant when using Hotspot or USB Tethering interface. */
+				Log.e("NetworkMidi", "Error joining multicast group", ex);
+			}
 			if (mWifi != null && mLock == null) {
 				mLock = mWifi.createMulticastLock("Log_Tag");
 				mLock.acquire();

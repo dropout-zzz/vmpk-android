@@ -105,6 +105,12 @@
         android:key="prefs_network">
 
       <ListPreference
+        android:title="@string/interface_name"
+        android:key="if_name"
+        android:defaultValue="@string/default_network_interface"
+        />
+
+      <ListPreference
         android:title="@string/ip_proto"
         android:key="ip_protocol"
         android:entries="@array/ip_protocols"

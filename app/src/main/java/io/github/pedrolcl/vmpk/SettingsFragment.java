@@ -20,8 +20,11 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.prefs.PreferenceChangeEvent;
 
 public class SettingsFragment extends PreferenceFragment
@@ -30,9 +33,38 @@ public class SettingsFragment extends PreferenceFragment
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
+
+		ListPreference iface = (ListPreference) findPreference("if_name");
+
+		if (iface != null) {
+			ArrayList<CharSequence> entries = new ArrayList<>(Arrays.asList(new CharSequence[]{getString(R.string.use_wifi)}));
+			ArrayList<CharSequence> values = new ArrayList<>(Arrays.asList(new CharSequence[]{getString(R.string.default_network_interface)}));
+
+			try {
+				Enumeration<NetworkInterface> nics = NetworkInterface.getNetworkInterfaces();
+
+				while (nics.hasMoreElements()) {
+					NetworkInterface nic = nics.nextElement();
+
+					// Seems useful to filter out some garbage.
+					if (!nic.supportsMulticast())
+						continue;
+
+					entries.add(nic.getName());
+					values.add(nic.getName());
+				}
+			} catch (SocketException ex) {
+				Log.e("SettingsFragment", "Error listing network interfaces", ex);
+			}
+
+			iface.setEntries(entries.toArray(new CharSequence[]{}));
+			iface.setEntryValues(values.toArray(new CharSequence[]{}));
+		}
+
 		for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
 			initSummary(getPreferenceScreen().getPreference(i));
 		}
+
 		// Set up a listener whenever a key changes
 		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 
